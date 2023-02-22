@@ -9,7 +9,7 @@ on:
       - 'go.mod'
 jobs:
   test:
-    name: Test with Coverage
+    name: multi
     runs-on: ubuntu-latest
     steps:
       - name: Set up Go

@@ -1,10 +1,10 @@
 package div
 
-func Sub(x, y int) int {
+func Div(x, y int) int {
 	return x % y
 }
 
-func CheckSub(x, y int) string {
+func CheckDiv(x, y int) string {
 	sum := x % y
 	if sum > 0 {
 		return "more"
