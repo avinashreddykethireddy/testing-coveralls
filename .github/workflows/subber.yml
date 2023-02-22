@@ -1,8 +1,15 @@
 name: Quality
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    paths:
+      - 'subber/**'
+      - 'go.mod'
 jobs:
   test:
-    name: Test with Coverage
+    name: subbber
     runs-on: ubuntu-latest
     steps:
       - name: Set up Go
@@ -16,10 +23,10 @@ jobs:
           go mod download
       - name: Run Unit tests
         run: |
-          go test -race -covermode atomic -coverprofile=covprofile ./...
+          go test -race -covermode atomic -coverprofile=coverage ./subber/...
       - name: Install goveralls
         run: go install github.com/mattn/goveralls@latest
       - name: Send coverage
         env:
           COVERALLS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: goveralls -coverprofile=covprofile -service=github
+        run: goveralls -coverprofile=coverage -service=github -flagname="subber"
