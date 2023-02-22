@@ -23,10 +23,10 @@ jobs:
           go mod download
       - name: Run Unit tests
         run: |
-          go test -race -covermode atomic -coverprofile=coverage.out ./multi/...
+          go test -race -covermode atomic -coverprofile=coverage ./multi/...
       - name: Install goveralls
         run: go install github.com/mattn/goveralls@latest
       - name: Send coverage
         env:
           COVERALLS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: goveralls -coverprofile=covprofile -service=github -repotoken r7LxqytGNW9po6zTgbCZXRIKCXXBE1F8u -flagname="multi"
+        run: goveralls -coverprofile=coverage -service=github -repotoken r7LxqytGNW9po6zTgbCZXRIKCXXBE1F8u -flagname="multi"

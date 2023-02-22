@@ -23,13 +23,13 @@ jobs:
           go mod download
       - name: Run Unit tests
         run: |
-          go test -race -covermode atomic -coverprofile=coverage.out ./testcoveralls/...
+          go test -race -covermode atomic -coverprofile=coverage ./testcoveralls/...
       - name: Install goveralls
         run: go install github.com/mattn/goveralls@latest
       - name: Send coverage
         env:
           COVERALLS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: goveralls -coverprofile=covprofile -service=github -repotoken r7LxqytGNW9po6zTgbCZXRIKCXXBE1F8u -flagname="adder"
+        run: goveralls -coverprofile=coverage -service=github -repotoken r7LxqytGNW9po6zTgbCZXRIKCXXBE1F8u -flagname="adder"
 #      - name: Convert coverage to lcov
 #        uses: jandelgado/gcov2lcov-action@v1.0.2
 #        with:
