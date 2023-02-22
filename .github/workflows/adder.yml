@@ -6,6 +6,9 @@ on:
   pull_request:
     paths:
       - 'testcoveralls/**'
+      - 'subber/**'
+      - 'mutli/**'
+      - 'div/**'
       - 'go.mod'
 jobs:
   test:
