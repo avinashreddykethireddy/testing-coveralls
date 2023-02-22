@@ -8,9 +8,7 @@ func CheckDiv(x, y int) string {
 	sum := x % y
 	if sum > 0 {
 		return "more"
-	} else if sum == 0 {
-		return "zero"
 	} else {
-		return "less"
+		return "zero"
 	}
 }

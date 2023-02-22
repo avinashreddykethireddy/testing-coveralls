@@ -17,8 +17,8 @@ func TestCheckDiv(t *testing.T) {
 		y        int
 		expected string
 	}{
-		{2, 5, "less"},
-		{20, 10, "more"},
+		{10, 6, "more"},
+		{20, 10, "zero"},
 	}
 	for _, c := range cases {
 		t.Run("testing", func(t *testing.T) {
