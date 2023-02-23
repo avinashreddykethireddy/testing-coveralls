@@ -29,6 +29,7 @@ jobs:
       - name: Send coverage
         env:
           COVERALLS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          COVERALLS_PARALLEL: true
         run: goveralls -coverprofile=coverage -service=github -flagname="adder"
 #      - name: Convert coverage to lcov
 #        uses: jandelgado/gcov2lcov-action@v1.0.2

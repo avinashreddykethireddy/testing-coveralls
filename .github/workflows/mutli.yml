@@ -29,4 +29,5 @@ jobs:
       - name: Send coverage
         env:
           COVERALLS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          COVERALLS_PARALLEL: true
         run: goveralls -coverprofile=coverage -service=github -flagname="multi"
