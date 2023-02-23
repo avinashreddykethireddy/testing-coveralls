@@ -4,7 +4,6 @@ func Div(x, y int) int {
 	return x % y
 }
 
-// comment
 func CheckDiv(x, y int) string {
 	sum := x % y
 	if sum > 0 {
