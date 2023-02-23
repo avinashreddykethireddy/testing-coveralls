@@ -4,6 +4,7 @@ func Sub(x, y int) int {
 	return x - y
 }
 
+// comment
 func CheckSub(x, y int) string {
 	sum := x - y
 	if sum > 0 {
