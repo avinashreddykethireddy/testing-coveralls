@@ -29,4 +29,17 @@ jobs:
       - name: Send coverage
         env:
           COVERALLS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          COVERALLS_PARALLEL: true
         run: goveralls -coverprofile=coverage -service=github -flagname="subber"
+  finish:
+    runs-on: ubuntu-latest
+    name: finish parallel build
+    needs: test
+    steps:
+      - name: Tell Coveralls that the parallel build is finished
+        run: |
+          curl -k \
+              https://coveralls.io/webhook?repo_token=$COVERALLS_REPO_TOKEN \
+              -d "payload[build_num]=$GITHUB_SHA&payload[status]=done"
+        env:
+          COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
