@@ -7,7 +7,6 @@ on:
     paths:
       - 'subber/**'
       - 'go.mod'
-      - '.github/workflows/**'
 jobs:
   test:
     name: subbber
@@ -26,9 +25,7 @@ jobs:
         run: |
           go test -race -covermode atomic -coverprofile=coverage ./subber/...
       - name: Coveralls
-        run: |
-          go install github.com/mattn/goveralls@latest
-          goveralls -coverprofile=coverage -service=github
+        uses: coverallsapp/github-action@v2
         env:
           COVERALLS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           COVERALLS_FLAG_NAME: 'subber'

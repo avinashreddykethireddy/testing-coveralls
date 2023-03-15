@@ -7,7 +7,6 @@ on:
     paths:
       - 'mutli/**'
       - 'go.mod'
-      - '.github/workflows/**'
 jobs:
   test:
     name: multi
@@ -26,6 +25,7 @@ jobs:
         run: |
           go test -race -covermode atomic -coverprofile=coverage ./mutli/...
       - name: Coveralls
+        uses: coverallsapp/github-action@v2
         env:
           COVERALLS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           COVERALLS_FLAG_NAME: 'multi'
@@ -34,7 +34,5 @@ jobs:
           COVERALLS_SERVICE_NUMBER: ${{ github.sha }}
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
+          file: ./coverage
           compare-ref: avinash/test-monorepo
-        run: |
-          go install github.com/mattn/goveralls@latest
-          goveralls -coverprofile=coverage -service=github
