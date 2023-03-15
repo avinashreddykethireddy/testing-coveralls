@@ -23,7 +23,9 @@ jobs:
           go mod download
       - name: Run Unit tests
         run: |
-          go test -race -covermode atomic -coverprofile=coverage ./testcoveralls/...
+          go install github.com/jandelgado/gcov2lcov@latest
+          go test -race -covermode atomic -coverprofile=coverage.out ./testcoveralls/...
+          gcov2lcov -infile=coverage.out -outfile=coverage.lcov
 #      - name: Install goveralls
 #        run: go install github.com/mattn/goveralls@latest
 #      - name: Send coverage
@@ -45,6 +47,6 @@ jobs:
           COVERALLS_SERVICE_JOB_ID: ${{ github.sha }}
           COVERALLS_SERVICE_NUMBER: ${{ github.sha }}
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          file: ./coverage
+
+          file: ./coverage.lcov
           compare-ref: avinash/test-monorepo
