@@ -4,7 +4,7 @@ func Add(x, y int) int {
 	return x + y
 }
 
-// comment2346
+// comment234677
 func CheckValues(x, y int) string {
 	sum := x + y
 	if sum > 10 {
