@@ -34,5 +34,5 @@ jobs:
           COVERALLS_SERVICE_NUMBER: ${{ github.sha }}
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          file: ./coverage.out
+          file: ./coverage
           compare-ref: avinash/test-monorepo

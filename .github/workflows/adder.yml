@@ -23,7 +23,7 @@ jobs:
           go mod download
       - name: Run Unit tests
         run: |
-          go test -race -covermode atomic -coverprofile=coverage.out ./testcoveralls/...
+          go test -race -covermode atomic -coverprofile=coverage ./testcoveralls/...
 #      - name: Install goveralls
 #        run: go install github.com/mattn/goveralls@latest
 #      - name: Send coverage
@@ -46,5 +46,5 @@ jobs:
           COVERALLS_SERVICE_NUMBER: ${{ github.sha }}
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          file: ./coverage.out
+          file: ./coverage
           compare-ref: avinash/test-monorepo
