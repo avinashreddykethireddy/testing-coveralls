@@ -7,6 +7,7 @@ on:
     paths:
       - 'mutli/**'
       - 'go.mod'
+      - '.github/workflows/**'
 jobs:
   test:
     name: multi
