@@ -26,9 +26,6 @@ jobs:
         run: |
           go test -race -covermode atomic -coverprofile=coverage ./mutli/...
       - name: Coveralls
-        run: |
-          go install github.com/mattn/goveralls@latest
-          goveralls -coverprofile=coverage -service=github
         env:
           COVERALLS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           COVERALLS_FLAG_NAME: 'multi'
@@ -38,3 +35,6 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           compare-ref: avinash/test-monorepo
+        run: |
+          go install github.com/mattn/goveralls@latest
+          goveralls -coverprofile=coverage -service=github
