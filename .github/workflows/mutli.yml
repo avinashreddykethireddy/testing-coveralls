@@ -25,7 +25,9 @@ jobs:
         run: |
           go test -race -covermode atomic -coverprofile=coverage ./mutli/...
       - name: Coveralls
-        uses: coverallsapp/github-action@v2
+        run: |
+          go install github.com/mattn/goveralls@latest
+          goveralls -coverprofile=coverage -service=github
         env:
           COVERALLS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           COVERALLS_FLAG_NAME: 'multi'

@@ -37,7 +37,9 @@ jobs:
 #          infile: coverage.out
 #          outfile: coverage.lcov
       - name: Coveralls
-        uses: coverallsapp/github-action@v2
+        run: |
+          go install github.com/mattn/goveralls@latest
+          goveralls -coverprofile=coverage -service=github
         env:
           COVERALLS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           COVERALLS_FLAG_NAME: 'testcoveralls'
@@ -46,5 +48,4 @@ jobs:
           COVERALLS_SERVICE_NUMBER: ${{ github.sha }}
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          file: ./coverage
           compare-ref: avinash/test-monorepo
