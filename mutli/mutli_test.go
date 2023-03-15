@@ -19,6 +19,7 @@ func TestCheckmulti(t *testing.T) {
 	}{
 		{2, -5, "less"},
 		{20, 10, "more"},
+		{20, 0, "zero"},
 	}
 	for _, c := range cases {
 		t.Run("testing", func(t *testing.T) {

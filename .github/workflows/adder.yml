@@ -2,7 +2,7 @@ name: Quality
 on:
   push:
     branches:
-      - main
+      - avinash/test-monorepo
   pull_request:
     paths:
       - 'testcoveralls/**'
@@ -23,21 +23,28 @@ jobs:
           go mod download
       - name: Run Unit tests
         run: |
-          go test -race -covermode atomic -coverprofile=coverage ./testcoveralls/...
-      - name: Install goveralls
-        run: go install github.com/mattn/goveralls@latest
-      - name: Send coverage
-        env:
-          COVERALLS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          COVERALLS_PARALLEL: true
-        run: goveralls -coverprofile=coverage -service=github -flagname="adder"
+          go test -race -covermode atomic -coverprofile=coverage.out ./testcoveralls/...
+#      - name: Install goveralls
+#        run: go install github.com/mattn/goveralls@latest
+#      - name: Send coverage
+#        env:
+#          COVERALLS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#          COVERALLS_PARALLEL: true
+#        run: goveralls -coverprofile=coverage -service=github -flagname="adder"
 #      - name: Convert coverage to lcov
 #        uses: jandelgado/gcov2lcov-action@v1.0.2
 #        with:
 #          infile: coverage.out
 #          outfile: coverage.lcov
-#      - name: Coveralls
-#        uses: coverallsapp/github-action@master
-#        with:
-#          github-token: ${{ secrets.GITHUB_TOKEN }}
-#          path-to-lcov: coverage.lcov
+      - name: Coveralls
+        uses: coverallsapp/github-action@v2
+        env:
+          COVERALLS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          COVERALLS_FLAG_NAME: 'testcoveralls'
+          COVERALLS_PARALLEL: true
+          COVERALLS_SERVICE_JOB_ID: ${{ github.sha }}
+          COVERALLS_SERVICE_NUMBER: ${{ github.sha }}
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          file: coverage.out
+          compare-ref: avinash/test-monorepo
