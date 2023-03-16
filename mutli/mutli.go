@@ -4,7 +4,7 @@ func Mutli(x, y int) int {
 	return x * y
 }
 
-// comment234
+// comment23456
 func Checkmulti(x, y int) string {
 	sum := x * y
 	if sum > 0 {
