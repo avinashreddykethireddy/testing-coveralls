@@ -11,6 +11,7 @@ func TestSub(t *testing.T) {
 	}
 }
 
+// comment
 func TestCheckSub(t *testing.T) {
 	cases := []struct {
 		x        int
