@@ -2,11 +2,11 @@ name: Quality
 on:
   push:
     branches:
-      - main
-  pull_request:
-    paths:
-      - 'testcoveralls/**'
-      - 'go.mod'
+      - avinash/test-monorepo
+#  pull_request:
+#    paths:
+#      - 'testcoveralls/**'
+#      - 'go.mod'
 jobs:
   test:
     name: testcoveralls

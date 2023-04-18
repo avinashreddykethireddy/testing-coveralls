@@ -1,0 +1,43 @@
+name: Coveralls report
+on:
+  push:
+    branches:
+      - avinash/test-monorepo
+  pull_request:
+    paths:
+      - 'subbers/**'
+#      - 'testcoveralls/**'
+#      - 'multi/**'
+#      - 'go.mod'
+
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Wait on tests (PR)
+        uses: lewagon/wait-on-check-action@v1.3.1
+        if: github.event_name == 'pull_request'
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          wait-interval: 20 # seconds
+          running-workflow-name: report
+          allowed-conclusions: success,skipped,cancelled,failure
+
+      - name: Wait on tests (push)
+        if: github.event_name != 'pull_request'
+        uses: lewagon/wait-on-check-action@v1.3.1
+        with:
+          ref: ${{ github.sha }}
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          wait-interval: 20 # seconds
+          running-workflow-name: report
+          allowed-conclusions: success,skipped,cancelled,failure
+
+      - uses: coverallsapp/github-action@v2
+        env:
+          COVERALLS_SERVICE_NUMBER: ${{ github.sha }}
+          COVERALLS_SERVICE_JOB_ID: ${{ github.sha }}
+        with:
+          carryforward: "testcoveralls, subber, multi"
+          parallel-finished: true
