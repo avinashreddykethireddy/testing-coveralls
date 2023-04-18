@@ -4,8 +4,8 @@ on:
     branches:
       - avinash/test-monorepo
   pull_request:
-#    paths:
-#      - 'subber/**'
+    paths:
+      - 'subbers/**'
 #      - 'testcoveralls/**'
 #      - 'multi/**'
 #      - 'go.mod'
