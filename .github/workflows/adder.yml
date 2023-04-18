@@ -2,11 +2,19 @@ name: Quality
 on:
   push:
     branches:
+<<<<<<< Updated upstream
       - main
   pull_request:
     paths:
       - 'testcoveralls/**'
       - 'go.mod'
+=======
+      - avinash/test-monorepo
+#  pull_request:
+#    paths:
+#      - 'testcoveralls/**'
+#      - 'go.mod'
+>>>>>>> Stashed changes
 jobs:
   test:
     name: testcoveralls
